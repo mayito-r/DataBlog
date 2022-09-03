@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Orihuela</title><link>/post/</link><description>Recent content in Posts on Orihuela</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 11 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Introducción a plotly</title><link>/p/introducci%C3%B3n-a-plotly/</link><pubDate>Thu, 11 Aug 2022 00:00:00 +0000</pubDate><guid>/p/introducci%C3%B3n-a-plotly/</guid><description>&lt;img src="/p/introducci%C3%B3n-a-plotly/cover.png" alt="Featured image of post Introducción a plotly" />&lt;h2 id="introducción-a-plotly">Introducción a plotly&lt;/h2>
+&lt;p>Plotly en una librería para visualización de datos, forma parte del proyecto Dash-Plotly el cual es un framework en python para elaborar dashboards, pero podemos hacer usos exclusivos de plotly para elaborar una gran variedad de graficas.
+En este post nos enfocaremos en la versión de plotly para Python, aunque también está disponible en R o JavaScript o Julia.
+Existen varias librerías populares para realizar gráficas, por mencionar algunas esta la clásica matlibplot, seaborn, altair la principal diferencia entra las antes mencionadas es que plotly permite elaborar gráficos interactivos lo que les dará un plus a tus visualizaciones. Aunque no es la única librería con estas capacidades, existe bokeh pero de ella hablaremos en otro post.&lt;/p>
+&lt;h2 id="instalación">Instalación.&lt;/h2>
+&lt;p>Bien ahora sí a lo que venimos. Instalar plotly es muy sencillo y lo haremos por medio de consola y pip ejecutando el siguiente código:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">pip install &lt;span class="nv">plotly&lt;/span>&lt;span class="o">==&lt;/span>5.10.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Ahora hablaremos un poco de como funciona, plotly trabaja de forma general con dos tipos de objetos:&lt;/p>
+&lt;ul>
+&lt;li>graph_objects: Figuras tipo&lt;/li>
+&lt;li>plotly.express: objetos de Plotly Express&lt;/li>
+&lt;/ul>
+&lt;p>El módulo graph_objects es el principal sobre el cual funciona plotly, nos permite un control total sobre todo los elementos de un gráfico con lo cual podremos personalizar a gusto nuestras visualizaciones, mientras que los objetos de plotly.express permite generar gráficas de manera rápida y con poco código, aunque está limitada en cuanto funcionalidad. Mi recomendación es usar siempre graph_objects.&lt;/p>
+&lt;h2 id="usando-plotly">Usando plotly&lt;/h2>
+&lt;p>Primero importaremos plotly mediante graph_objects y pandas para manipular algunos datos.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">plotly.graph_objects&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">go&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">pandas&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">pd&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Ahora creamos un dataframe con números aleatorios y crearemos un variable llamada fig donde primero declararemos un objeto tipo Figure y como argumento llamamos a la función go.Scatter() la cual nos servirá para crear una gráfica de línea:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">list&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">randint&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">fig&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">go&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Figure&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">go&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Scatter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">y&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">fig&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">show&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>
+&lt;div id="/plots/hugo_plot.json" class="plotly" style="height:500px;">&lt;/div>
+&lt;script>
+d3.json("/plots/hugo_plot.json").then(function (fig) {
+Plotly.newPlot('\/plots\/hugo_plot.json', fig.data, fig.layout, { responsive: true });
+});
+&lt;/script>
+&lt;p>Ahora creamos un dataframe con números aleatorios y crearemos un variable llamada fig donde primero declararemos un objeto tipo Figure y como argumento llamamos a la función go.Scatter() la cual nos servirá para crear una gráfica de línea:&lt;/p>
+&lt;h2 id="sin-cambios">sin cambios&lt;/h2>
+&lt;p>asjdnak sdaojsndkn kasd kans d&lt;/p></description></item></channel></rss>
