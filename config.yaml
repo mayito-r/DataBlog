@@ -1,4 +1,4 @@
-baseurl: "https://orihuela-iom.github.io"
+baseurl: "https://orihuela-iom.github.io/DataBlog/"
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
